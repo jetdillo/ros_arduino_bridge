@@ -32,3 +32,27 @@ long Ping(int pin) {
   return(range);
 }
 
+long Ping4Pin(int trigger,int echo) {
+  long duration, range;
+
+  // Sensors like HCS04 are similar to the PING))), but have a separate trigger vs. echo pin
+  
+  pinMode(trigger, OUTPUT);
+  digitalWrite(trigger, LOW);
+  delayMicroseconds(5);
+  digitalWrite(trigger, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigger, LOW);
+
+  pinMode(echo, INPUT);
+  duration = pulseIn(echo, HIGH);
+
+  // convert the time into meters
+  range = microsecondsToCm(duration);
+  
+  return(range);
+}
+
+
+
+
